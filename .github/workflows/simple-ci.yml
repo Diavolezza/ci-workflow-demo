@@ -46,12 +46,22 @@ jobs:
         uses: green-coding-berlin/eco-ci-energy-estimation@main
         with:
           task: get-measurement
-
+          
+      - name: Eco-CI Results
+        uses: green-coding-berlin/eco-ci-energy-estimation@main
+        with:
+          task: display-results
+          
   test:
     name: Test Job
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Eco-CI Initialization
+        uses: green-coding-berlin/eco-ci-energy-estimation@main
+        with:
+          task: start-measurement
+          
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -78,12 +88,21 @@ jobs:
         uses: green-coding-berlin/eco-ci-energy-estimation@main
         with:
           task: get-measurement
+
+      - name: Eco-CI Results
+        uses: green-coding-berlin/eco-ci-energy-estimation@main
+        with:
+          task: display-results
           
   deploy:
     name: Deploy Job
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - name: Eco-CI Initialization
+        uses: green-coding-berlin/eco-ci-energy-estimation@main
+        with:
+          task: start-measurement
       - name: Checkout code
         uses: actions/checkout@v3
 
